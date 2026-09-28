@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Delivery Route Optimizer &amp; Driver Safety Chatbot</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">🚚 DeliveryAI</div>
+    <nav>
+      <button class="nav active" data-view="dashboard">📊 Dashboard</button>
+      <button class="nav" data-view="route">🗺️ Route Optimizer</button>
+      <button class="nav" data-view="chat">💬 Safety Chatbot</button>
+      <button class="nav" data-view="policy">📄 Safety Policy</button>
+      <button class="nav" data-view="settings">⚙️ Settings</button>
+    </nav>
+  </aside>
+
+  <main>
+    <header><h1 id="page-title">Dashboard</h1>
+      <span class="sub">AI-Based Multi-Stop Delivery Route Optimization &amp; Driver Safety Support</span></header>
+
+    <div class="grid" id="grid">
+      <section class="card route-card" data-views="dashboard route">
+        <h2>Route Optimization</h2>
+        <div class="controls">
+          <label>Warehouse
+            <select id="warehouse"><option value="Warehouse">Warehouse</option></select>
+          </label>
+          <div class="customers">
+            <label><input type="checkbox" value="Customer A" checked> Customer A</label>
+            <label><input type="checkbox" value="Customer B" checked> Customer B</label>
+            <label><input type="checkbox" value="Customer C" checked> Customer C</label>
+            <label><input type="checkbox" value="Customer D" checked> Customer D</label>
+          </div>
+          <button id="optimize-btn" class="primary">Optimize Route</button>
+        </div>
+        <div id="error" class="error"></div>
+        <div class="stats">
+          <div class="stat"><span>Total Distance</span><b id="dist">--</b></div>
+          <div class="stat"><span>Estimated Time</span><b id="time">--</b></div>
+          <div class="stat"><span>Average Speed</span><b id="speed">--</b></div>
+        </div>
+        <h3>Optimized Delivery Route</h3>
+        <div id="route-text" class="route-text">Click "Optimize Route"</div>
+        <div id="map"></div>
+      </section>
+
+      <section class="card chat-card" data-views="dashboard chat">
+        <h2>Driver Support Chatbot</h2>
+        <div id="messages" class="messages">
+          <div class="msg bot">Hello driver! Ask me anything about the company safety policy.</div>
+        </div>
+        <div class="chat-input">
+          <input id="chat-input" type="text" placeholder="e.g. Can I use my phone while driving?">
+          <button id="send-btn" class="primary">Send</button>
+        </div>
+      </section>
+
+      <section class="card" data-views="policy">
+        <h2>Company Safety Policy</h2>
+        <div id="policy-content">Loading...</div>
+      </section>
+
+      <section class="card" data-views="settings">
+        <h2>Settings</h2>
+        <label>Average speed (km/h)
+          <input id="speed-input" type="number" min="1" max="120" value="30">
+        </label>
+        <button id="save-settings" class="primary">Save Settings</button>
+        <p id="settings-msg" class="sub"></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
